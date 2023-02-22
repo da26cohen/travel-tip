@@ -2,7 +2,11 @@
     box-sizing: border-box;
 }
 
-
+h1{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 2em;
+    color: #70d272;
+}
 body {
     background-color: #333;
 }
@@ -36,9 +40,11 @@ td:hover{
 }
 
 .main-layout {
+    padding: 5px;
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-template-rows: 1fr;
+    gap: 40px;
 }
 
 .search-container {
@@ -47,6 +53,7 @@ td:hover{
 }
 
 .map {
+    max-width: 50vw;
     grid-column: 2;
 }
 
