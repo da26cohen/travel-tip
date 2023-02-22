@@ -7,24 +7,30 @@
     <title>TravelTip</title>
 </head>
 
-<body onload="onInit()">
+<body class="main-layout" onload="onInit()">
     <h1>TravelTip</h1>
     <form class="search-container" onsubmit="onSearch(event)">
         <input type="search" id="searching"  placeholder="Enter location" class="input">
         <button type="submit">go</button>
+        <button  class="btn-add-marker">My location</button>
     </form>
 
-    <div id="map" style="width: 100%; height: 400px;"></div>
-    <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
-    <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
-    <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
-    <button onclick="onPanTo()"class="btn-pan">Pan Map to Tokyo</button>
+    <div class="map" id="map" style="width: 100%; height: 400px;"></div>
+    <div class="btns">
+        <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
+        <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
+        <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
+        <button onclick="onPanTo()"class="btn-pan">Pan Map to Tokyo</button>
+    </div>
 
+<div class="info-locations">
     <p>You are at: <span class="user-pos"></span></p>
     <p>Locations: 
         <pre class="locs"></pre>
     </p>
     
+</div>
+
 
     <script type="module" src="js/app.controller.js"></script>
 </body>
