@@ -9,6 +9,7 @@ window.onGetLocs = renderLocs
 window.onGetUserPos = onGetUserPos
 window.onPanTo = onPanTo
 window.onRemoveLoc = onRemoveLoc
+window.onSearch = onSearch
 
 function onInit() {
     mapService.initMap()
@@ -44,6 +45,13 @@ function renderLocs() {
  <th>updateAt</th>
  <th>actions</th>
 </tr>`
+    function onMapClick() {
+        gMap.addListener("click", (mapsMouseEvent) => {
+            let pos = mapsMouseEvent.latLng.toJSON()
+            locService.createNewLoc(pos)
+        });
+
+    }
 
     locService.getLocs()
         .then(locs => {
@@ -96,4 +104,19 @@ function onPanTo(lat, lng) {
 function onRemoveLoc(id) {
     locService.removeLocById(id)
     renderLocs()
+}
+
+
+function onSearch(ev) {
+    ev.preventDefault()
+    const API_KEY = 'AIzaSyCx6oTjqM9rukY905vfCTxcwW2Hv23l-vE'
+    const address = document.querySelector(".search-input").value;
+    const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${API_KEY}`;
+    fetch(geocodeUrl)
+        .then(search => search.json())
+        .then(res => {
+            const loc = res.results[0].geometry.location;
+            onPanTo(loc.lat, loc.lng)
+            locService.createNewLoc(loc,address)
+        })
 }
