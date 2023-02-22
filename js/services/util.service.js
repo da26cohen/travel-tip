@@ -4,6 +4,7 @@ export const utilService = {
     loadFromStorage,
     getRandomIntInclusive,
     getCurrentDate,
+    getShortedNum,
 }
 
 function saveToStorage(key, value) {
@@ -42,3 +43,8 @@ function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+function getShortedNum(num) {
+    num *= 1000
+    num = parseInt(num)
+    return num / 1000
+}
