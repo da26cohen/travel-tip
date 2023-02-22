@@ -16,23 +16,23 @@ function loadFromStorage(key) {
 }
 
 function makeId(length = 5) {
-    var txt = ''
-    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    for (var i = 0; i < length; i++) {
+    let txt = ''
+    let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    for (let i = 0; i < length; i++) {
         txt += possible.charAt(Math.floor(Math.random() * possible.length))
     }
     return txt
 }
 
 function getCurrentDate() {
-    var date = new Date();
-    var time = {
+    let date = new Date();
+    let time = {
         hour: '2-digit',
         minute: '2-digit',
         timeZone: 'Asia/Jerusalem'
     }
-    var timeString = date.toLocaleTimeString('en-US', time);
-    var dateString = date.toLocaleDateString() + ' ' + timeString;
+    let timeString = date.toLocaleTimeString('en-US', time);
+    let dateString = date.toLocaleDateString() + ' ' + timeString;
     return dateString;
 }
 

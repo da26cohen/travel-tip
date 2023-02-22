@@ -20,7 +20,7 @@ function getLocs() {
 }
 
 function createNewLoc(name, lat, lng) {
-    const loc = getEmptyLoc()
+    const loc = {}
     loc.id = utilService.makeId()
     loc.name = prompt('Enter location name') // change to modal later
     loc.lat = lat
@@ -36,12 +36,7 @@ function _addNewLoc(loc) {
     locs.push(loc)
 }
 
-
-function getEmptyLoc(name = '') {
-    return { id: '', name}
-}
-
-function removeLocById(locId) {
+function removeLocById(id) {
     let removeIdx = locs.findIndex(loc => loc.id === id)
     locs.splice(removeIdx,1)
 }
