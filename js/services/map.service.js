@@ -5,6 +5,7 @@ export const mapService = {
     clickedMap
 }
 import { storageService } from './async-storage.service.js'
+import {locService} from './loc.service.js'
 
 // Var that is used throughout this Module (not global)
 var gMap
@@ -27,9 +28,8 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 
 function clickedMap() {
     gMap.addListener("click", (mapsMouseEvent) => {
-        let position = mapsMouseEvent.latLng.toJSON()
-        console.log(position);
-        return position
+        let pos = mapsMouseEvent.latLng.toJSON()
+        locService.createNewLoc(pos)
     });
 
 }

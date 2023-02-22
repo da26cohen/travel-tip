@@ -1,16 +1,20 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
 
+
 window.onload = onInit
 window.onAddMarker = onAddMarker
 window.OnPanToUserLoc = OnPanToUserLoc
-window.onGetLocs = onGetLocs
+window.onGetLocs = renderLocs
 window.onGetUserPos = onGetUserPos
+window.onPanTo = onPanTo
+window.onRemoveLoc = onRemoveLoc
 
 function onInit() {
     mapService.initMap()
         .then(() => {
             mapService.clickedMap()
+
 
         })
         .catch(() => console.log('Error: cannot init map'))
@@ -30,15 +34,44 @@ function onAddMarker() {
     mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 })
 }
 
-function onGetLocs() {
+function renderLocs() {
+    let strHtml = `<tr>
+ <th>name</th>
+ <th>lat</th>
+ <th>lang</th>
+ <th>weather</th>
+ <th>createdAt</th>
+ <th>updateAt</th>
+ <th>actions</th>
+</tr>`
+
     locService.getLocs()
         .then(locs => {
             console.log('Locations:', locs)
-            document.querySelector('.locs').innerText = JSON.stringify(locs, null, 2)
+            strHtml += locs.map(loc => `
+                 <tr>
+                 <td>${loc.name}</td> 
+                 <td>${loc.lat}</td> 
+                 <td>${loc.lng}</td> 
+                 <td>${loc.weather}</td> 
+                 <td>${loc.createdAt}</td> 
+                 <td>${loc.updatedAt}</td> 
+                 <td><button class="btn-go" onclick="onPanTo(${loc.lat},${loc.lng})">go</button>
+                 <button class="btn-delete" onclick="onRemoveLoc('${loc.id}')">delete</button> 
+                 </td> 
+                 </tr>
+                 `
+            ).join('')
+            document.querySelector('.locs-table').innerHTML = strHtml
         })
+
+
 }
 
 function onGetUserPos() {
+    locService.getLocs()
+        .then(res => console.log(res))
+
     getPosition()
         .then(pos => {
             console.log('User position is:', pos.coords)
@@ -53,4 +86,14 @@ function onGetUserPos() {
 function OnPanToUserLoc() {
     getPosition()
         .then(res => mapService.panTo(res.coords.latitude, res.coords.longitude))
+}
+
+function onPanTo(lat, lng) {
+    console.log(lat, lng);
+    mapService.panTo(lat, lng)
+}
+
+function onRemoveLoc(id) {
+    locService.removeLocById(id)
+    renderLocs()
 }

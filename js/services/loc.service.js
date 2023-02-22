@@ -1,5 +1,7 @@
 export const locService = {
-    getLocs
+    getLocs,
+    createNewLoc,
+    removeLocById
 }
 
 import { storageService } from './async-storage.service.js'
@@ -7,8 +9,6 @@ import { utilService } from './util.service.js'
 
 
 const locs = [
-    _createLoc('paris', 33.33, 34.33),
-    _createLoc('athens', 33.33, 35.33),
 ]
 
 function getLocs() {
@@ -19,16 +19,17 @@ function getLocs() {
     })
 }
 
-function createNewLoc(name, lat, lng) {
+function createNewLoc(pos) {
     const loc = {}
     loc.id = utilService.makeId()
-    loc.name = prompt('Enter location name') // change to modal later
-    loc.lat = lat
-    loc.lng = lng
+    loc.name = prompt('whats the location name?')
+    loc.lat = pos.lat
+    loc.lng = pos.lng
     loc.weather = 'no weather yet'
     loc.createdAt = utilService.getCurrentDate()
     loc.updatedAt = utilService.getCurrentDate()
     _addNewLoc(loc) // add to locs
+    console.log(locs);
     return loc
 }
 
