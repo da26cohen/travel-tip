@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
-    
+
     <title>Travel</title>
 </head>
 
 <body class="main-layout" onload="onInit()">
     <h1>Travel-Tip!</h1>
     <form class="search-container" onsubmit="onSearch(event)">
-        <input type="search" id="searching"  placeholder="Enter location" class="input">
+        <input type="search" id="searching" placeholder="Enter location" class="search-input">
         <button type="submit">go</button>
-        <button onclick=" OnPanToUserLoc()"  class="btn-add-marker">My location</button>
+        <button onclick=" OnPanToUserLoc()" class="btn-add-marker">My location</button>
+        <button onclick="onCopyLocation()" class="btn-add-marker">Copy Location</button>
     </form>
 
     <div class="map" id="map" style="width: 100%; height: 400px;"></div>
@@ -23,15 +25,16 @@
         <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
     </div>
 
-<div class="info-locations">
-    <p>You are at: <span class="user-pos"></span></p>
-    <p class="main-p">Locations: 
-        <table> 
+    <div class="info-locations">
+        <p class="location-input">You are at: <span class="user-pos"></span></p>
+        <p class="main-p">Locations:
+        <table>
             <tbody class="locs-table"></tbody>
         </table>
-  
-    </p>
-</div>
+
+        </p>
+    </div>
     <script type="module" src="js/app.controller.js"></script>
 </body>
+
 </html>

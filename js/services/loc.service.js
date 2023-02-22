@@ -19,10 +19,10 @@ function getLocs() {
     })
 }
 
-function createNewLoc(pos) {
+function createNewLoc(pos,name = 'unkown') {
     const loc = {}
     loc.id = utilService.makeId()
-    loc.name = prompt('whats the location name?')
+    loc.name = name
     loc.lat = pos.lat
     loc.lng = pos.lng
     loc.weather = 'no weather yet'

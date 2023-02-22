@@ -79,3 +79,9 @@ td:hover{
     color: antiquewhite;
     font-size: larger;
 }
+
+.location-input{
+    font-family: 'Courier New', Courier, monospace;
+    color: antiquewhite;
+    font-size: larger;
+}

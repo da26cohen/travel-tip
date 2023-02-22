@@ -10,16 +10,21 @@ window.onGetLocs = renderLocs
 window.onGetUserPos = onGetUserPos
 window.onPanTo = onPanTo
 window.onRemoveLoc = onRemoveLoc
+window.onSearch = onSearch
 
 function onInit() {
+    
+   
     mapService.initMap()
         .then(() => {
             mapService.clickedMap()
-          
+            const lat = utilService.getValFromParam('lat')
+            const lng = utilService.getValFromParam('lng')
+            onPanTo(lng,lat)
 
         })
         .catch(() => console.log('Error: cannot init map'))
-
+       
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -45,6 +50,14 @@ function renderLocs() {
  <th>updateAt</th>
  <th>actions</th>
 </tr>`
+
+// function clickedMap() {
+//     gMap.addListener("click", (mapsMouseEvent) => {
+//         let pos= mapsMouseEvent.latLng.toJSON()
+//         locService.createNewLoc(pos)
+//     });
+
+// }
 
     locService.getLocs()
         .then(locs => {
@@ -100,3 +113,34 @@ function onRemoveLoc(id) {
     renderLocs()
 }
 
+
+function onSearch(ev) {
+    ev.preventDefault()
+    const API_KEY = 'AIzaSyCx6oTjqM9rukY905vfCTxcwW2Hv23l-vE'
+    const address = document.querySelector(".search-input").value;
+    const elSpan = document.querySelector('.user-pos')
+    elSpan.innerHTML = address
+    const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${API_KEY}`;
+    fetch(geocodeUrl)
+        .then(search => search.json())
+        .then(res => {
+            const loc = res.results[0].geometry.location;
+            const posLat = {lat:loc.lat}
+            const posLng = {lng:loc.lng}
+            onPanTo(loc.lat, loc.lng)
+            locService.createNewLoc(loc,address)
+            renderLocs()
+            utilService.setQueryParams(posLat)
+            utilService.setQueryParams(posLng)
+
+            const x = utilService.getValFromParam('lat')
+            console.log(x);
+        })
+}
+
+
+function onCopyLocation(){
+
+    const url = `https://da26cohen.github.io/travel-tip/`
+
+}
