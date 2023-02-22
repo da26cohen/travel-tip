@@ -4,6 +4,7 @@ export const utilService = {
     loadFromStorage,
     getRandomIntInclusive,
     getCurrentDate,
+    getShortedNum,
 }
 
 function saveToStorage(key, value) {
