@@ -10,6 +10,7 @@ window.onGetLocs = renderLocs
 window.onGetUserPos = onGetUserPos
 window.onPanTo = onPanTo
 window.onRemoveLoc = onRemoveLoc
+window.onCopyLocation = onCopyLocation
 window.onSearch = onSearch
 
 function onInit() {
@@ -21,6 +22,7 @@ function onInit() {
             const lat = utilService.getValFromParam('lat')
             const lng = utilService.getValFromParam('lng')
             onPanTo(lng,lat)
+            onCopyLocation(lat,lng)
 
         })
         .catch(() => console.log('Error: cannot init map'))
@@ -127,20 +129,34 @@ function onSearch(ev) {
             const loc = res.results[0].geometry.location;
             const posLat = {lat:loc.lat}
             const posLng = {lng:loc.lng}
+            onCopyLocation(loc.lat,loc.lng)
             onPanTo(loc.lat, loc.lng)
             locService.createNewLoc(loc,address)
             renderLocs()
             utilService.setQueryParams(posLat)
             utilService.setQueryParams(posLng)
 
-            const x = utilService.getValFromParam('lat')
-            console.log(x);
         })
 }
 
 
-function onCopyLocation(){
+function onCopyLocation(lat,lng){
+    const url = new URL("https://da26cohen.github.io/travel-tip/index.html");
+    url.searchParams.set("lat", lat);
+    url.searchParams.set("lng", lng);
+    // Add event listener to the "Copy Link" button
+    const copyLinkButton = document.querySelector('.copy-loc')
+    copyLinkButton.addEventListener("click", () => {
+      // Copy the URL to the clipboard
+      navigator.clipboard.writeText(url.href)
+        .then(() => {
+          console.log("Link copied to clipboard");
+        })
+        .catch((err) => {
+          console.error("Failed to copy link: ", err);
+        });
+    })
 
-    const url = `https://da26cohen.github.io/travel-tip/`
+    }
 
-}
+  
