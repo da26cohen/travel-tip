@@ -1,5 +1,6 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
+import { utilService } from './services/util.service.js'
 
 
 window.onload = onInit
@@ -14,7 +15,7 @@ function onInit() {
     mapService.initMap()
         .then(() => {
             mapService.clickedMap()
-
+          
 
         })
         .catch(() => console.log('Error: cannot init map'))
@@ -48,11 +49,12 @@ function renderLocs() {
     locService.getLocs()
         .then(locs => {
             console.log('Locations:', locs)
-            strHtml += locs.map(loc => `
+            strHtml += locs.map(loc =>
+                 `
                  <tr>
                  <td>${loc.name}</td> 
-                 <td>${loc.lat}</td> 
-                 <td>${loc.lng}</td> 
+                 <td>${utilService.getShortedNum(loc.lat)}</td> 
+                 <td>${utilService.getShortedNum(loc.lng)}</td> 
                  <td>${loc.weather}</td> 
                  <td>${loc.createdAt}</td> 
                  <td>${loc.updatedAt}</td> 
@@ -97,3 +99,4 @@ function onRemoveLoc(id) {
     locService.removeLocById(id)
     renderLocs()
 }
+
