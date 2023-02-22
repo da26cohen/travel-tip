@@ -3,7 +3,6 @@ import { mapService } from './services/map.service.js'
 
 window.onload = onInit
 window.onAddMarker = onAddMarker
-window.onPanTo = onPanTo
 window.OnPanToUserLoc = OnPanToUserLoc
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
@@ -11,9 +10,12 @@ window.onGetUserPos = onGetUserPos
 function onInit() {
     mapService.initMap()
         .then(() => {
+            mapService.clickedMap()
+        
             console.log('Map is ready')
         })
         .catch(() => console.log('Error: cannot init map'))
+
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition

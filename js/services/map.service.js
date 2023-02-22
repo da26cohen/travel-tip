@@ -1,9 +1,10 @@
 export const mapService = {
     initMap,
     addMarker,
-    panTo
+    panTo,
+    clickedMap
 }
-
+import { storageService } from './async-storage.service.js'
 
 // Var that is used throughout this Module (not global)
 var gMap
@@ -20,6 +21,30 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             })
             console.log('Map!', gMap)
         })
+  
+}
+
+
+
+function clickedMap(){
+   
+   
+ 
+  
+    // Configure the click listener.
+    gMap.addListener("click", (mapsMouseEvent) => {
+        console.log('clicked');
+    //   Close the current InfoWindow.
+      infoWindow.close();
+    //   Create a new InfoWindow.
+      infoWindow = new google.maps.InfoWindow({
+        position: mapsMouseEvent.latLng,
+      });
+      infoWindow.setContent(
+        JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+      );
+      infoWindow.open(gMap);
+    });
 }
 
 function addMarker(loc) {

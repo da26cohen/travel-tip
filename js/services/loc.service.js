@@ -2,6 +2,10 @@ export const locService = {
     getLocs
 }
 
+import { storageService } from './async-storage.service.js'
+    
+
+
 
 const locs = [
     { name: 'Greatplace', lat: 32.047104, lng: 34.832384 }, 
@@ -17,3 +21,13 @@ function getLocs() {
 }
 
 
+
+
+// function _createLoc(name) {
+//     const pet = getEmptyPet()
+//     pet.id = utilService.makeId()
+//     pet.type = utilService.randomPetType()
+//     pet.name = name || utilService.randomPetName(pet.type)
+//     pet.birth = utilService.randomPastTime()
+//     return pet
+// }
