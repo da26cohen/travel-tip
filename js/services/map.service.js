@@ -21,30 +21,17 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             })
             console.log('Map!', gMap)
         })
-  
+
 }
 
 
-
-function clickedMap(){
-   
-   
- 
-  
-    // Configure the click listener.
+function clickedMap() {
     gMap.addListener("click", (mapsMouseEvent) => {
-        console.log('clicked');
-    //   Close the current InfoWindow.
-      infoWindow.close();
-    //   Create a new InfoWindow.
-      infoWindow = new google.maps.InfoWindow({
-        position: mapsMouseEvent.latLng,
-      });
-      infoWindow.setContent(
-        JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
-      );
-      infoWindow.open(gMap);
+        let position = mapsMouseEvent.latLng.toJSON()
+        console.log(position);
+        return position
     });
+
 }
 
 function addMarker(loc) {
