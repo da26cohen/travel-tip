@@ -118,5 +118,6 @@ function onSearch(ev) {
             const loc = res.results[0].geometry.location;
             onPanTo(loc.lat, loc.lng)
             locService.createNewLoc(loc,address)
+            renderLocs()
         })
 }
