@@ -4,6 +4,7 @@ import { mapService } from './services/map.service.js'
 window.onload = onInit
 window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
+window.OnPanToUserLoc = OnPanToUserLoc
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 
@@ -47,11 +48,8 @@ function onGetUserPos() {
             console.log('err!!!', err)
         })
 }
-function onPanTo() {
-    //    const loc =  getPosition().
-    //     then(res=> res.coords)
-    //     .then(res => mapService.panTo(res.Latitude,res.Longitude) )
-    //     console.log('Panning the Map')
 
-    mapService.panTo(35.6895, 139.6917)
+function OnPanToUserLoc() {
+    getPosition()
+        .then(res => mapService.panTo(res.coords.latitude, res.coords.longitude))
 }
