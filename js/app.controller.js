@@ -48,9 +48,10 @@ function onGetUserPos() {
         })
 }
 function onPanTo() {
-   const loc =  getPosition().
-    then(res=> res.coords)
+    //    const loc =  getPosition().
+    //     then(res=> res.coords)
+    //     .then(res => mapService.panTo(res.Latitude,res.Longitude) )
+    //     console.log('Panning the Map')
 
-    console.log('Panning the Map')
     mapService.panTo(35.6895, 139.6917)
 }
