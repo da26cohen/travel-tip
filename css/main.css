@@ -2,6 +2,11 @@
     box-sizing: border-box;
 }
 
+h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 40px;
+    color: #70d272;
+}
 
 body {
     background-color: #333;
@@ -9,45 +14,107 @@ body {
 
 
 table {
+    font-size: 20px;
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
+table{
+    text-align: center;
+}
+
+
 
 td,
 th {
     border: 3px solid #050605;
-    text-align: left;
+    text-align: center;
+    
     padding: 8px;
 }
 
 th {
-background-color: antiquewhite;
+    background-color: antiquewhite;
 }
-td{
+
+td {
     background-color: #70d272;
 }
 
-th:hover{
+th:hover {
     background-color: rgb(246, 203, 151);
 }
-td:hover{
+
+td:hover {
     background-color: #a5f3a7;
 }
 
+.btns{
+    display: flex;
+    gap: 10px;
+}
+.btns button{
+    padding: 10px;
+    font-size: 1.5rem;
+    border-radius: 10px;
+}
+
+button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
 .main-layout {
+    padding: 5px;
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-template-rows: 1fr;
+    gap: 40px;
+    justify-self: center;
+}
+
+
+
+.search-input {
+    text-align: center;
+    font-size: 30px;
+    border-radius: 10px;
+    background-color: lightblue;
 }
 
 .search-container {
     grid-column: 2;
     grid-row: 1;
+    display: flex;
+    justify-self: center;
+    border-radius: 20px;
+    gap: 20px;
+    padding: 15px;
+}
+
+
+.info-locations p{
+    font-size: 2em;
+}
+
+
+.search-container button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+.search-container button:hover {
+    cursor: pointer;
+    opacity: 0.8;
 }
 
 .map {
+    max-width: 50vw;
     grid-column: 2;
+    border-radius: 20px;
+    border: 5px rgb(255, 255, 255) solid;
+    justify-self: center;
 }
 
 .info-locations {
@@ -55,19 +122,25 @@ td:hover{
     grid-row: 2;
 }
 
-.btn-delete{
+.btn-delete {
     cursor: pointer;
     width: 50px;
     background-color: rgb(230, 82, 82);
 }
 
-.btn-go{
+.btn-go {
     cursor: pointer;
     width: 50px;
     background-color: aqua;
 }
 
-.main-p{
+.main-p {
+    font-family: 'Courier New', Courier, monospace;
+    color: antiquewhite;
+    font-size: larger;
+}
+
+.location-input {
     font-family: 'Courier New', Courier, monospace;
     color: antiquewhite;
     font-size: larger;
